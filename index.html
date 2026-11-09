@@ -34,10 +34,6 @@
             900: '#0A1B33',
             950: '#060F1F',
           },
-          gold: {
-            400: '#C9A227',
-            500: '#AD8B1E',
-          },
           paper: '#F5F7FA',
         },
         fontFamily: {
@@ -65,18 +61,25 @@
     img.onerror = null;
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300">' +
               '<rect width="100%" height="100%" fill="#0A1B33"/>' +
-              '<text x="50%" y="50%" fill="#C9A227" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" dominant-baseline="middle">' + label + '</text>' +
+              '<text x="50%" y="50%" fill="#38BDF8" font-family="Inter, sans-serif" font-size="16" text-anchor="middle" dominant-baseline="middle">' + label + '</text>' +
               '</svg>';
     img.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
   }
 </script>
 
+<script>if('IntersectionObserver' in window)document.documentElement.classList.add('js');</script>
 <style>
   [x-cloak] { display: none !important; }
 
   #beranda, #tentang, #proyek, #pengalaman, #keahlian, #sertifikat, #kontak {
     scroll-margin-top: 5rem;
   }
+
+  /* Muncul halus saat scroll (hanya aktif bila JS + IntersectionObserver tersedia) */
+  .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; transition-delay: var(--d, 0ms); }
+  .js .reveal.is-visible { opacity: 1; transform: none; }
+  #proyek article img { transition: transform .6s ease; }
+  #proyek article:hover img { transform: scale(1.04); }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -92,33 +95,33 @@
 <body class="font-sans text-navy-900 bg-white antialiased" x-data="{ mobileOpen: false }">
 
   <!-- ============ NAVBAR ============ -->
-  <header class="fixed top-0 inset-x-0 z-50 bg-navy-900/95 backdrop-blur-sm shadow-lg shadow-navy-950/20">
+  <header class="fixed top-0 inset-x-0 z-50 bg-navy-950/80 backdrop-blur-md border-b border-white/10">
     <nav class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="#beranda" class="font-heading text-xl font-bold text-white tracking-tight">
-        Muhamad Ilham Fadillah Suherlan<span class="text-gold-400">.</span>
+        Muhamad Ilham Fadillah Suherlan<span class="text-sky-400">.</span>
       </a>
 
       <!-- Menu desktop -->
-      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+      <ul class="hidden lg:flex items-center gap-6 text-xs font-medium uppercase tracking-[0.16em]">
         <li><a href="#beranda" class="nav-link text-blue-100/80 hover:text-white transition-colors">Beranda</a></li>
         <li><a href="#tentang" class="nav-link text-blue-100/80 hover:text-white transition-colors">Tentang</a></li>
         <li><a href="#proyek" class="nav-link text-blue-100/80 hover:text-white transition-colors">Proyek</a></li>
         <li><a href="#pengalaman" class="nav-link text-blue-100/80 hover:text-white transition-colors">Pengalaman</a></li>
         <li><a href="#keahlian" class="nav-link text-blue-100/80 hover:text-white transition-colors">Keahlian</a></li>
         <li><a href="#sertifikat" class="nav-link text-blue-100/80 hover:text-white transition-colors">Sertifikat</a></li>
-        <li><div role="group" aria-label="Pilih bahasa" class="inline-flex items-center rounded-full border border-white/20 p-0.5"><button type="button" data-lang-btn="id" class="px-3 py-1 rounded-full text-xs font-semibold text-blue-100/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400">ID</button><button type="button" data-lang-btn="en" class="px-3 py-1 rounded-full text-xs font-semibold text-blue-100/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400">EN</button></div></li>
-        <li><a href="#kontak" class="inline-flex items-center rounded-full bg-gold-400 text-navy-900 px-4 py-2 hover:bg-gold-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900">Kontak</a></li>
+        <li><div role="group" aria-label="Pilih bahasa" class="inline-flex items-center rounded-full border border-white/20 p-0.5"><button type="button" data-lang-btn="id" class="px-3 py-1 rounded-full text-xs font-semibold text-blue-100/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">ID</button><button type="button" data-lang-btn="en" class="px-3 py-1 rounded-full text-xs font-semibold text-blue-100/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">EN</button></div></li>
+        <li><a href="#kontak" class="inline-flex items-center rounded-full bg-sky-400 text-navy-900 px-4 py-2 hover:bg-sky-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900">Kontak</a></li>
       </ul>
 
       <!-- Tombol menu mobile -->
-      <button @click="mobileOpen = !mobileOpen" :aria-expanded="mobileOpen" aria-label="Buka menu navigasi" class="md:hidden text-white p-2 -mr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 rounded">
+      <button @click="mobileOpen = !mobileOpen" :aria-expanded="mobileOpen" aria-label="Buka menu navigasi" class="lg:hidden text-white p-2 -mr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded">
         <svg x-show="!mobileOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         <svg x-show="mobileOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
     </nav>
 
     <!-- Panel menu mobile -->
-    <div x-show="mobileOpen" x-cloak x-transition class="md:hidden bg-navy-900 border-t border-white/10">
+    <div x-show="mobileOpen" x-cloak x-transition class="lg:hidden bg-navy-900 border-t border-white/10">
       <ul class="px-6 py-4 space-y-4 font-medium">
         <li><a @click="mobileOpen=false" href="#beranda" class="block text-blue-100/90 hover:text-white">Beranda</a></li>
         <li><a @click="mobileOpen=false" href="#tentang" class="block text-blue-100/90 hover:text-white">Tentang</a></li>
@@ -126,19 +129,21 @@
         <li><a @click="mobileOpen=false" href="#pengalaman" class="block text-blue-100/90 hover:text-white">Pengalaman</a></li>
         <li><a @click="mobileOpen=false" href="#keahlian" class="block text-blue-100/90 hover:text-white">Keahlian</a></li>
         <li><a @click="mobileOpen=false" href="#sertifikat" class="block text-blue-100/90 hover:text-white">Sertifikat</a></li>
-        <li><div role="group" aria-label="Pilih bahasa" class="inline-flex items-center rounded-full border border-white/20 p-0.5"><button type="button" data-lang-btn="id" class="px-3 py-1 rounded-full text-xs font-semibold text-blue-100/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400">ID</button><button type="button" data-lang-btn="en" class="px-3 py-1 rounded-full text-xs font-semibold text-blue-100/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400">EN</button></div></li>
-        <li><a @click="mobileOpen=false" href="#kontak" class="block text-gold-400 font-semibold">Kontak</a></li>
+        <li><div role="group" aria-label="Pilih bahasa" class="inline-flex items-center rounded-full border border-white/20 p-0.5"><button type="button" data-lang-btn="id" class="px-3 py-1 rounded-full text-xs font-semibold text-blue-100/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">ID</button><button type="button" data-lang-btn="en" class="px-3 py-1 rounded-full text-xs font-semibold text-blue-100/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">EN</button></div></li>
+        <li><a @click="mobileOpen=false" href="#kontak" class="block text-sky-400 font-semibold">Kontak</a></li>
       </ul>
     </div>
   </header>
 
   <main>
     <!-- ============ HERO ============ -->
-    <section id="beranda" class="relative bg-navy-900 text-white min-h-screen flex items-center">
-      <div class="max-w-6xl mx-auto px-6 pt-24 pb-16 md:pt-20 md:pb-20 w-full flex flex-col-reverse md:flex-row items-center gap-14">
+    <section id="beranda" class="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-navy-700 text-white min-h-screen flex items-center">
+      <div class="pointer-events-none absolute -top-32 -right-24 h-[28rem] w-[28rem] rounded-full bg-sky-400/20 blur-3xl" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-sky-500/15 blur-3xl" aria-hidden="true"></div>
+      <div class="relative max-w-6xl mx-auto px-6 pt-24 pb-16 md:pt-20 md:pb-20 w-full flex flex-col-reverse md:flex-row items-center gap-14">
 
         <div class="flex-1 text-center md:text-left animate-fadeUp">
-          <p class="text-gold-400 font-medium mb-3">Halo, saya</p>
+          <p class="text-sky-400 text-sm font-semibold uppercase tracking-[0.25em] mb-4">Halo, saya</p>
           <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">Muhamad Ilham Fadillah Suherlan</h1>
           <p class="mt-4 font-heading text-xl sm:text-2xl text-blue-200">Software Engineering Graduate</p>
           <p class="mt-1 text-blue-200/80">System Analysis · Backend Development · Software Testing</p>
@@ -146,15 +151,15 @@
             Lulusan D3 Software Engineering dengan pengalaman magang dan proyek akademik, mulai dari analisis kebutuhan, perancangan sistem dan database, pengembangan, pengujian, hingga deployment ke cloud. Terbuka untuk posisi System Analyst, Backend Developer, QA, dan Mobile Developer.
           </p>
           <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
-            <a href="#proyek" class="rounded-full bg-gold-400 text-navy-900 font-semibold px-6 py-3 hover:bg-gold-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900">Lihat Proyek</a>
+            <a href="#proyek" class="rounded-full bg-sky-400 text-navy-900 font-semibold px-6 py-3 hover:bg-sky-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900">Lihat Proyek</a>
             <a href="#kontak" class="rounded-full border border-white/30 text-white font-semibold px-6 py-3 hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60">Hubungi Saya</a>
           </div>
         </div>
 
         <div class="flex-1 flex justify-center md:justify-end animate-fadeUp [animation-delay:150ms]">
           <div class="relative">
-            <!-- Ganti foto.jpg dengan foto profil Anda -->
-            <img src="pasfoto.jpeg" alt="Foto profil Muhamad Ilham" onerror="fallbackImg(this,'Foto Profil')" class="block w-64 h-64 sm:w-80 sm:h-80 object-contain">
+            <div class="absolute -inset-3 rounded-[2.25rem] bg-gradient-to-br from-sky-400/40 to-transparent blur-2xl" aria-hidden="true"></div>
+            <img src="foto-profil.jpg" alt="Foto profil Muhamad Ilham" width="640" height="800" onerror="fallbackImg(this,'Foto Profil')" class="relative block w-60 sm:w-72 aspect-[4/5] rounded-[2rem] object-cover object-top ring-1 ring-white/20 shadow-2xl shadow-black/30">
           </div>
         </div>
 
@@ -164,15 +169,15 @@
     <!-- ============ ABOUT ME ============ -->
     <section id="tentang" class="py-24 bg-white">
       <div class="max-w-3xl mx-auto px-6 text-center md:text-left">
-        <h2 class="font-heading text-3xl font-bold text-navy-900">Tentang Saya</h2>
-        <div class="mt-3 w-14 h-1 bg-gold-400 rounded-full mx-auto md:mx-0"></div>
+        <h2 class="font-heading text-2xl sm:text-3xl font-semibold uppercase tracking-[0.14em] text-navy-900">Tentang Saya</h2>
+        <div class="mt-3 w-14 h-0.5 bg-sky-400 mx-auto md:mx-0"></div>
         <p class="mt-6 text-slate-600 leading-relaxed">
           Lulusan D3 Software Engineering dengan pengalaman magang dan proyek akademik di bidang analisis kebutuhan, pengembangan backend dan mobile, perancangan database, pengujian perangkat lunak, dan deployment ke cloud. Terbiasa menerjemahkan kebutuhan stakeholder menjadi kebutuhan fungsional dan non-fungsional serta model sistem yang mendukung implementasi.
         </p>
         <p class="mt-4 text-slate-600 leading-relaxed">
           Saat magang di Balai Bahasa Provinsi Jawa Barat, saya mengimplementasikan fitur utama flipbook pada aplikasi mobile Kado Ceria. Saya juga memimpin tim proyek CMS Kado Ceria dalam melakukan keseluruhan timeline pengembangan aplikasi.
         </p>
-        <div class="mt-8 border-l-2 border-gold-400 pl-4 text-left">
+        <div class="mt-8 border-l-2 border-sky-400 pl-4 text-left">
           <p class="font-heading font-semibold text-navy-900">Diploma (D3) Software Engineering</p>
           <p class="text-sm text-slate-600">Politeknik Negeri Bandung · Agu 2023 – Agu 2026 · IPK 3,58/4,00</p>
         </div>
@@ -183,8 +188,8 @@
     <section id="proyek" class="py-24 bg-paper">
       <div class="max-w-6xl mx-auto px-6">
         <div class="text-center md:text-left mb-12">
-          <h2 class="font-heading text-3xl font-bold text-navy-900">Proyek</h2>
-          <div class="mt-3 w-14 h-1 bg-gold-400 rounded-full mx-auto md:mx-0"></div>
+          <h2 class="font-heading text-2xl sm:text-3xl font-semibold uppercase tracking-[0.14em] text-navy-900">Proyek</h2>
+          <div class="mt-3 w-14 h-0.5 bg-sky-400 mx-auto md:mx-0"></div>
           <p class="mt-4 text-slate-600 max-w-2xl mx-auto md:mx-0">Proyek utama saya, dengan peran, teknologi, pekerjaan yang saya lakukan, dan status yang sebenarnya.</p>
         </div>
 
@@ -204,9 +209,9 @@
               </ul>
               <p class="mt-4 text-xs text-slate-500 leading-relaxed"><span class="font-semibold text-navy-900">Status:</span> Proyek tugas akhir tim, ditujukan untuk Balai Bahasa. Sudah di-deploy ke AWS, belum dipakai secara operasional.</p>
               <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-              <a data-repo="cms" href="https://github.com/DAliRIJTK/cms-kadoceria" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
-              <a href="https://drive.google.com/file/d/1WFYu0j6bVu4X-T5O3wnnFcQYb4F4FN_q/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Dokumen SRS</a>
-              <a href="https://drive.google.com/file/d/1zP9ONmouvG7KbAFLze48mpuXN0ksZv73/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Dokumen SDD</a>
+              <a data-repo="cms" href="https://github.com/DAliRIJTK/cms-kadoceria" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
+              <a href="https://drive.google.com/file/d/1WFYu0j6bVu4X-T5O3wnnFcQYb4F4FN_q/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Dokumen SRS</a>
+              <a href="https://drive.google.com/file/d/1zP9ONmouvG7KbAFLze48mpuXN0ksZv73/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Dokumen SDD</a>
               </div>
             </div>
           </article>
@@ -224,8 +229,8 @@
               </ul>
               <p class="mt-4 text-xs text-slate-500 leading-relaxed"><span class="font-semibold text-navy-900">Status:</span> Dikerjakan saat magang dan diserahkan kepada Balai Bahasa; belum dipakai secara operasional oleh pengguna.</p>
               <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-              <a data-repo="mobile" href="https://github.com/Radja-Restu-A/KadoCeria" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
-              <a href="https://drive.google.com/file/d/1V0H-qtTX4MuvcX2seBV8bJ8q7s5TuXK3/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Buku panduan</a>
+              <a data-repo="mobile" href="https://github.com/Radja-Restu-A/KadoCeria" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
+              <a href="https://drive.google.com/file/d/1V0H-qtTX4MuvcX2seBV8bJ8q7s5TuXK3/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Buku panduan</a>
               </div>
             </div>
           </article>
@@ -243,8 +248,8 @@
               </ul>
               <p class="mt-4 text-xs text-slate-500 leading-relaxed"><span class="font-semibold text-navy-900">Status:</span> Proyek akademik.</p>
               <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-              <a href="https://github.com/grow-app-4/grow-app-mobile" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
-              <a href="https://drive.google.com/file/d/1vefDIgVopVxa_IrHyaex4vVqfhN70gTS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Dokumen teknis</a>
+              <a href="https://github.com/grow-app-4/grow-app-mobile" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
+              <a href="https://drive.google.com/file/d/1vefDIgVopVxa_IrHyaex4vVqfhN70gTS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Dokumen teknis</a>
               </div>
             </div>
           </article>
@@ -257,25 +262,25 @@
             <h4 class="font-heading font-semibold text-navy-900">Suku Face Recognition</h4>
             <p class="text-xs text-slate-500 mt-1">Feb 2025 – Jun 2025 · Python · Backend Developer</p>
             <p class="mt-2 text-sm text-slate-600 leading-relaxed">Sistem pengenalan wajah berbasis deep learning. Saya me-refactor fitur preprocessing menggunakan library MTCNN.</p>
-            <a href="https://github.com/yanirahmawati234/suku-face-recognition" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
+            <a href="https://github.com/yanirahmawati234/suku-face-recognition" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
           </article>
           <article class="bg-white rounded-2xl border border-slate-200 p-5">
             <h4 class="font-heading font-semibold text-navy-900">Gamifikasi Semaphore</h4>
             <p class="text-xs text-slate-500 mt-1">Feb 2025 – Jun 2025 · Python · Backend Developer</p>
             <p class="mt-2 text-sm text-slate-600 leading-relaxed">Menambahkan fitur permainan pada sistem deteksi semaphore yang sudah ada: hasil deteksi dibandingkan dengan target untuk menentukan benar atau salah.</p>
-            <a href="https://github.com/ilhamfs7/TUBES_PCD_PR_Gamifikasi_Semaphore" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
+            <a href="https://github.com/ilhamfs7/TUBES_PCD_PR_Gamifikasi_Semaphore" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
           </article>
           <article class="bg-white rounded-2xl border border-slate-200 p-5">
             <h4 class="font-heading font-semibold text-navy-900">Hidingdata</h4>
             <p class="text-xs text-slate-500 mt-1">Feb 2024 – Jun 2024 · C · Backend Developer</p>
             <p class="mt-2 text-sm text-slate-600 leading-relaxed">Aplikasi penyembunyi pesan rahasia dalam gambar. Saya mengimplementasikan enkripsi dan dekripsi LSB dengan doubly circular linked list.</p>
-            <a href="https://github.com/ilhamfs7/proyek2-kel2" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
+            <a href="https://github.com/ilhamfs7/proyek2-kel2" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
           </article>
           <article class="bg-white rounded-2xl border border-slate-200 p-5">
             <h4 class="font-heading font-semibold text-navy-900">Pencarian Barang dengan Struktur Data Trie</h4>
             <p class="text-xs text-slate-500 mt-1">Feb 2024 – Jun 2024 · C++ · Backend Developer</p>
             <p class="mt-2 text-sm text-slate-600 leading-relaxed">Tugas akademik penerapan struktur data Trie. Saya mengimplementasikan fitur pencarian berbasis Trie.</p>
-            <a href="https://github.com/Yorubreak/Tugas-Besar-SDA" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-gold-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
+            <a href="https://github.com/Yorubreak/Tugas-Besar-SDA" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex w-fit items-center text-sm font-semibold text-navy-700 border-b-2 border-sky-400 hover:text-navy-900 transition-colors">Lihat repositori</a>
           </article>
         </div>
       </div>
@@ -285,14 +290,14 @@
     <section id="pengalaman" class="py-24 bg-white">
       <div class="max-w-3xl mx-auto px-6">
         <div class="text-center md:text-left mb-12">
-          <h2 class="font-heading text-3xl font-bold text-navy-900">Pengalaman</h2>
-          <div class="mt-3 w-14 h-1 bg-gold-400 rounded-full mx-auto md:mx-0"></div>
+          <h2 class="font-heading text-2xl sm:text-3xl font-semibold uppercase tracking-[0.14em] text-navy-900">Pengalaman</h2>
+          <div class="mt-3 w-14 h-0.5 bg-sky-400 mx-auto md:mx-0"></div>
         </div>
 
         <ol class="relative border-l-2 border-navy-100 ml-3">
 
           <li class="mb-2 ml-8 relative">
-            <span class="absolute -left-[43px] top-0 flex items-center justify-center w-9 h-9 rounded-full bg-white border-2 border-gold-400 overflow-hidden">
+            <span class="absolute -left-[43px] top-0 flex items-center justify-center w-9 h-9 rounded-full bg-white border-2 border-sky-400 overflow-hidden">
               <img src="tutwuri.png" alt="Logo Balai Bahasa Jabar" onerror="fallbackImg(this,'BB')" class="w-full h-full object-contain">
             </span>
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
@@ -316,8 +321,8 @@
     <section id="keahlian" class="py-24 bg-paper">
       <div class="max-w-6xl mx-auto px-6">
         <div class="text-center md:text-left mb-12">
-          <h2 class="font-heading text-3xl font-bold text-navy-900">Keahlian</h2>
-          <div class="mt-3 w-14 h-1 bg-gold-400 rounded-full mx-auto md:mx-0"></div>
+          <h2 class="font-heading text-2xl sm:text-3xl font-semibold uppercase tracking-[0.14em] text-navy-900">Keahlian</h2>
+          <div class="mt-3 w-14 h-0.5 bg-sky-400 mx-auto md:mx-0"></div>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 lg:gap-6">
@@ -408,8 +413,8 @@
     <section id="sertifikat" class="py-24 bg-paper">
       <div class="max-w-6xl mx-auto px-6">
         <div class="text-center md:text-left mb-12">
-          <h2 class="font-heading text-3xl font-bold text-navy-900">Sertifikat</h2>
-          <div class="mt-3 w-14 h-1 bg-gold-400 rounded-full mx-auto md:mx-0"></div>
+          <h2 class="font-heading text-2xl sm:text-3xl font-semibold uppercase tracking-[0.14em] text-navy-900">Sertifikat</h2>
+          <div class="mt-3 w-14 h-0.5 bg-sky-400 mx-auto md:mx-0"></div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -452,13 +457,13 @@
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-10 pb-14 border-b border-white/10">
 
         <div>
-          <h2 class="font-heading text-3xl font-bold">Mari Terhubung</h2>
+          <h2 class="font-heading text-2xl sm:text-3xl font-semibold uppercase tracking-[0.14em]">Mari Terhubung</h2>
           <p class="mt-3 text-blue-100/80 max-w-md">Terbuka untuk peluang kerja sebagai System Analyst, Backend Developer, QA, atau Mobile Developer, serta kolaborasi dan diskusi seputar software engineering.</p>
           <div class="mt-6 space-y-2 text-sm">
-            <a href="mailto:muh.ilham.fs@gmail.com" class="flex items-center gap-3 text-blue-100/90 hover:text-gold-400 transition-colors w-fit">
+            <a href="mailto:muh.ilham.fs@gmail.com" class="flex items-center gap-3 text-blue-100/90 hover:text-sky-400 transition-colors w-fit">
               <i class="fa-solid fa-envelope w-5 text-center"></i> muh.ilham.fs@gmail.com
             </a>
-            <a href="tel:+6281214145706" class="flex items-center gap-3 text-blue-100/90 hover:text-gold-400 transition-colors w-fit">
+            <a href="tel:+6281214145706" class="flex items-center gap-3 text-blue-100/90 hover:text-sky-400 transition-colors w-fit">
               <i class="fa-solid fa-phone w-5 text-center"></i> +62 812-1414-5706
             </a>
             <p class="flex items-center gap-3 text-blue-100/90"><i class="fa-solid fa-location-dot w-5 text-center"></i> Cimahi, Indonesia</p>
@@ -467,11 +472,11 @@
 
         <div class="flex flex-col items-start md:items-end gap-6">
           <div class="flex items-center gap-3">
-            <a href="https://www.linkedin.com/in/muhamadilhamfs" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://github.com/ilhamfs7" aria-label="GitHub" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/muhamadilhamfs" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/ilhamfs7" aria-label="GitHub" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"><i class="fa-brands fa-github"></i></a>
           </div>
           <div class="flex flex-wrap gap-3 md:justify-end">
-            <a href="CV-General.pdf" download class="inline-flex items-center gap-2 rounded-full bg-gold-400 text-navy-900 font-semibold px-5 py-2.5 hover:bg-gold-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"><i class="fa-solid fa-download"></i> Unduh CV</a>
+            <a href="CV-General.pdf" download class="inline-flex items-center gap-2 rounded-full bg-sky-400 text-navy-900 font-semibold px-5 py-2.5 hover:bg-sky-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"><i class="fa-solid fa-download"></i> Unduh CV</a>
           </div>
         </div>
 
@@ -479,7 +484,8 @@
 
       <div class="py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-blue-100/50">
         <!-- <p>© 2026 Muhammad Ilham. Seluruh hak cipta dilindungi.</p> -->
-        <a href="#beranda" class="hover:text-gold-400 transition-colors">Kembali ke atas</a>
+        <a href="https://html5up.net/massively" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400 transition-colors">Desain terinspirasi dari Massively oleh HTML5 UP</a>
+        <a href="#beranda" class="hover:text-sky-400 transition-colors">Kembali ke atas</a>
       </div>
     </div>
   </footer>
@@ -516,7 +522,7 @@
   // Atur true bila repositori sudah dipublikasikan, maka tautan "Lihat repositori" akan muncul.
   var PUBLIC_REPOS = { cms: true, mobile: false };
   (function () {
-    var EN = {"Beranda": "Home", "Tentang": "About", "Proyek": "Projects", "Pengalaman": "Experience", "Keahlian": "Skills", "Sertifikat": "Certificates", "Kontak": "Contact", "Buka menu navigasi": "Open navigation menu", "Pilih bahasa": "Select language", "Halo, saya": "Hi, I'm", "Lulusan D3 Software Engineering dengan pengalaman magang dan proyek akademik, mulai dari analisis kebutuhan, perancangan sistem dan database, pengembangan, pengujian, hingga deployment ke cloud. Terbuka untuk posisi System Analyst, Backend Developer, QA, dan Mobile Developer.": "Software Engineering diploma graduate with internship and academic project experience, from requirements analysis, system and database design, and development to testing and cloud deployment. Open to System Analyst, Backend Developer, QA, and Mobile Developer roles.", "Lihat Proyek": "View Projects", "Hubungi Saya": "Contact Me", "Foto profil Muhamad Ilham": "Profile photo of Muhamad Ilham", "Tentang Saya": "About Me", "Lulusan D3 Software Engineering dengan pengalaman magang dan proyek akademik di bidang analisis kebutuhan, pengembangan backend dan mobile, perancangan database, pengujian perangkat lunak, dan deployment ke cloud. Terbiasa menerjemahkan kebutuhan stakeholder menjadi kebutuhan fungsional dan non-fungsional serta model sistem yang mendukung implementasi.": "Software Engineering graduate (D3) with internship and academic project experience in requirements analysis, backend and mobile development, database design, software testing, and cloud deployment. Skilled at turning stakeholder needs into functional and non-functional requirements and system models that support implementation.", "Saat magang di Balai Bahasa Provinsi Jawa Barat, saya mengimplementasikan fitur utama flipbook pada aplikasi mobile Kado Ceria. Saya juga memimpin tim proyek CMS Kado Ceria dalam melakukan keseluruhan timeline pengembangan aplikasi.": "During my internship at Balai Bahasa Provinsi Jawa Barat, I implemented the main flipbook feature of the Kado Ceria mobile app. I also led the Kado Ceria CMS project team through the entire application development timeline.", "Diploma (D3) Software Engineering": "Diploma (D3) in Software Engineering", "Politeknik Negeri Bandung · Agu 2023 – Agu 2026 · IPK 3,58/4,00": "Politeknik Negeri Bandung · Aug 2023 – Aug 2026 · GPA 3.58/4.00", "Proyek utama saya, dengan peran, teknologi, pekerjaan yang saya lakukan, dan status yang sebenarnya.": "My main projects, with my role, technologies, what I worked on, and their actual status.", "Tangkapan layar CMS Kado Ceria": "Screenshot of the Kado Ceria CMS", "Jan 2026 – Agu 2026": "Jan 2026 – Aug 2026", "Peran:": "Role:", "Teknologi:": "Technologies:", "Masalah: konten flipbook aplikasi Kado Ceria tertanam di kode, sehingga setiap pembaruan perlu ubah kode dan deploy ulang. CMS ini dirancang agar Balai Bahasa dapat memperbarui konten tanpa itu.": "Problem: the Kado Ceria app's flipbook content was embedded in code, so every update required a code change and redeployment. This CMS is designed to let Balai Bahasa update content without that.", "Memimpin tim: pembagian tugas dan jadwal.": "Led the team: task allocation and scheduling.", "Menggali 10 user requirement dan 14 business rule, dielaborasi menjadi 34 kebutuhan fungsional dan 10 non-fungsional (2 use case).": "Elicited 10 user requirements and 14 business rules, elaborated into 34 functional and 10 non-functional requirements (2 use cases).", "Merancang arsitektur, package diagram, 12 sequence diagram, class diagram, deployment diagram, dan model data konseptual/logis/fisik.": "Designed the architecture, package diagram, 12 sequence diagrams, class diagram, deployment diagram, and conceptual/logical/physical data models.", "Memelihara dan memperbaiki kode yang sudah ada: bug fitur audio (narasi, latar, objek), konversi buku, dan CRUD buku; refactor logika audio latar untuk mengurangi kode redundan.": "Maintained and improved the existing codebase: fixed bugs in audio features (narration, background, object), book conversion, and book CRUD; refactored background-audio logic to reduce redundant code.", "Menyusun 44 test case UAT; menjalankan pengujian integrasi dan black-box (15 test case) serta validasi (43 test case), semuanya lulus 100%; uji NFR pasca-deployment 5 test case (80% lulus).": "Prepared 44 UAT test cases; ran integration and black-box testing (15 test cases) and validation testing (43 test cases), all passing 100%; post-deployment NFR testing with 5 test cases (80% pass).", "Deploy ke AWS (EC2, S3, RDS, SQS).": "Deployed to AWS (EC2, S3, RDS, SQS).", "Proyek tugas akhir tim, ditujukan untuk Balai Bahasa. Sudah di-deploy ke AWS, belum dipakai secara operasional.": "Team final project, intended for Balai Bahasa. Deployed to AWS; not yet in operational use.", "Lihat repositori": "View repository", "Tangkapan layar aplikasi mobile Kado Ceria": "Screenshot of the Kado Ceria mobile app", "Aplikasi Mobile Kado Ceria": "Kado Ceria Mobile App", "Jul 2025 – Okt 2025 (magang)": "Jul 2025 – Oct 2025 (internship)", "Masalah: buku digital cerita anak dwibahasa (Sunda-Indonesia) terbitan Balai Bahasa perlu dialihwahanakan menjadi buku audio interaktif untuk anak usia dini, pembelajar BIPA, dan penyandang disabilitas.": "Problem: the bilingual (Sundanese–Indonesian) digital children's storybooks published by Balai Bahasa needed to be adapted into interactive audio books for early childhood, BIPA learners, and persons with disabilities.", "Mewawancarai stakeholder dan menganalisis sistem yang berjalan; 2 use case dan 3 sub use case dijadikan 9 kebutuhan fungsional dan 4 non-fungsional.": "Interviewed stakeholders and analyzed the existing system; turned 2 use cases and 3 sub-use cases into 9 functional and 4 non-functional requirements.", "Merancang ERD dan UI aplikasi.": "Designed the ERD and app UI.", "Mengimplementasikan fitur utama flipbook (efek balik halaman dengan page_flip, pemutaran audio dengan audioplayers).": "Implemented the main flipbook feature (page-turn effect with page_flip, audio playback with audioplayers).", "Dikerjakan saat magang dan diserahkan kepada Balai Bahasa; belum dipakai secara operasional oleh pengguna.": "Built during the internship and handed over to Balai Bahasa; not yet in operational use by real users.", "Tangkapan layar aplikasi GROW": "Screenshot of the GROW app", "GROW (Aplikasi Mobile)": "GROW (Mobile App)", "Masalah: orang tua perlu memantau kebutuhan gizi harian anak dan mendapat rekomendasi makanan beserta harga pembuatannya. Aplikasi ini dirancang untuk itu.": "Problem: parents need to monitor their child's daily nutrition and get food recommendations with preparation costs. This app is designed for that.", "Merancang ERD dan database PostgreSQL.": "Designed the ERD and PostgreSQL database.", "Mengimplementasikan fitur monitoring asupan harian ibu dan ASI anak (penyimpanan lokal dan integrasi API).": "Implemented the daily intake monitoring feature for mothers and breast milk intake for children (local storage and API integration).", "Menyusun 10 test case untuk fitur tersebut, semuanya lulus.": "Wrote 10 test cases for that feature, all passing.", "Proyek akademik.": "Academic project.", "Proyek akademik lainnya": "Other academic projects", "Sistem pengenalan wajah berbasis deep learning. Saya me-refactor fitur preprocessing menggunakan library MTCNN.": "Deep-learning-based face recognition system. I refactored the preprocessing feature using the MTCNN library.", "Modifikasi sistem deteksi semaphore yang sudah ada dengan menambahkan fitur permainan di dalamnya dengan sistem hasil deteksi disimpan dan dibandingkan dengan target untuk menentukan benar atau salah.": "Modification of an existing semaphore detection system by adding a game feature: detection results are stored and compared with the target to determine whether they are correct.", "Aplikasi penyembunyi pesan rahasia dalam gambar. Saya mengimplementasikan enkripsi dan dekripsi LSB dengan doubly circular linked list.": "Application that hides secret messages in images. I implemented LSB encryption and decryption using a doubly circular linked list.", "Pencarian Barang dengan Struktur Data Trie": "Item Search Using the Trie Data Structure", "Tugas akademik penerapan struktur data Trie. Saya mengimplementasikan fitur pencarian berbasis Trie.": "Academic assignment applying the Trie data structure. I implemented the Trie-based search feature.", "Logo Balai Bahasa Jabar": "Balai Bahasa Jawa Barat logo", "di Balai Bahasa Provinsi Jawa Barat": "at Balai Bahasa Provinsi Jawa Barat", "Jul 2025 – Okt 2025": "Jul 2025 – Oct 2025", "Mewawancarai stakeholder dan menganalisis sistem yang berjalan; menyusun 2 use case dan 3 sub use case menjadi 9 kebutuhan fungsional dan 4 non-fungsional.": "Interviewed stakeholders and analyzed the existing system; turned 2 use cases and 3 sub-use cases into 9 functional and 4 non-functional requirements.", "Mengimplementasikan fitur utama flipbook pada Kado Ceria, aplikasi buku audio interaktif dwibahasa (Sunda-Indonesia) untuk anak usia dini, pembelajar BIPA, dan penyandang disabilitas, menggunakan Flutter/Dart, MVVM, page_flip, dan audioplayers.": "Implemented the main flipbook feature of Kado Ceria, a bilingual (Sundanese–Indonesian) interactive audio storybook app for early childhood, BIPA learners, and persons with disabilities, using Flutter/Dart, MVVM, page_flip, and audioplayers.", "Menjalankan User Acceptance Testing (UAT) secara demonstrasi dan mempresentasikan penyerahan aplikasi langsung kepada instansi.": "Ran User Acceptance Testing (UAT) as a live demonstration and presented the application handover on-site at the institution.", "Analisis & dokumentasi": "Analysis & documentation", "Analisis sistem berjalan": "Existing-system analysis", "Desain data": "Data design", "Pengujian": "Testing", "Penyusunan test case": "Test case development", "Sertifikat Arutala Junior Backend Developer using Spring Boot": "Arutala Junior Backend Developer using Spring Boot certificate", "Arutalalab · Jul 2026": "Arutalalab · Jul 2026", "Berlaku: Jul 2026 – Jul 2029": "Valid: Jul 2026 – Jul 2029", "Sertifikat TOEIC skor 765": "TOEIC certificate, score 765", "Politeknik Negeri Bandung · Skor 765 · Mei 2026": "Politeknik Negeri Bandung · Score 765 · May 2026", "Berlaku: Mei 2026 – Mei 2028": "Valid: May 2026 – May 2028", "Sertifikat LKMM-TD": "LKMM-TD certificate", "Latihan Keterampilan Manajemen Mahasiswa Tingkat Dasar (LKMM-TD)": "Basic Student Management Skills Training (LKMM-TD)", "Politeknik Negeri Bandung · Nov 2023": "Politeknik Negeri Bandung · Nov 2023", "Berlaku: Lifetime": "Valid: lifetime", "Mari Terhubung": "Let's Connect", "Terbuka untuk peluang kerja sebagai System Analyst, Backend Developer, QA, atau Mobile Developer, serta kolaborasi dan diskusi seputar software engineering.": "Open to opportunities as a System Analyst, Backend Developer, QA, or Mobile Developer, and to collaboration and discussion about software engineering.", "Kembali ke atas": "Back to top", "Repositori privat": "Private repository", "Portofolio Muhamad Ilham Fadillah Suherlan, lulusan D3 Software Engineering dengan fokus System Analysis, Backend Development, dan Software Testing. Lihat proyek, pengalaman magang, dan sertifikat.": "Portfolio of Muhamad Ilham Fadillah Suherlan, D3 Software Engineering graduate focused on System Analysis, Backend Development, and Software Testing. See projects, internship experience, and certificates.", "System Analysis, Backend Development, dan Software Testing.": "System Analysis, Backend Development, and Software Testing.", "Mengidentifikasi stakeholder, merancang domain model; 5 use case dan 1 sub use case dijadikan 14 kebutuhan fungsional dan 7 non-fungsional.": "Identified stakeholders and designed the domain model; turned 5 use cases and 1 sub-use case into 14 functional and 7 non-functional requirements.", "Dokumen SRS": "SRS document", "Dokumen SDD": "SDD document", "Buku panduan": "User guide", "Dokumen teknis": "Technical document", "Masalah: konten flipbook Kado Ceria tertanam di kode, sehingga setiap pembaruan perlu ubah kode dan deploy ulang. CMS ini memungkinkan Balai Bahasa memperbarui konten sendiri.": "Problem: Kado Ceria's flipbook content was embedded in code, so every update required a code change and redeployment. This CMS lets Balai Bahasa update the content on its own.", "Memimpin tim; menyusun 34 kebutuhan fungsional dan 10 non-fungsional serta rancangan sistem (sequence, class, dan deployment diagram, serta model data).": "Led the team; wrote 34 functional and 10 non-functional requirements and the system design (sequence, class, and deployment diagrams, and data models).", "Memperbaiki bug fitur audio, konversi buku, dan CRUD buku, serta me-refactor logika audio latar.": "Fixed bugs in the audio, book conversion, and book CRUD features, and refactored the background audio logic.", "Menyusun 44 test case UAT; pengujian integrasi, black-box, dan validasi lulus 100%, uji NFR pasca-deployment 80%.": "Wrote 44 UAT test cases; integration, black-box, and validation testing passed 100%, post-deployment NFR testing 80%.", "Masalah: buku cerita anak dwibahasa (Sunda-Indonesia) terbitan Balai Bahasa perlu dijadikan buku audio interaktif untuk anak usia dini, pembelajar BIPA, dan penyandang disabilitas.": "Problem: the bilingual (Sundanese–Indonesian) children's storybooks published by Balai Bahasa needed to become interactive audio books for early childhood, BIPA learners, and people with disabilities.", "Mewawancarai stakeholder dan menyusun 9 kebutuhan fungsional dan 4 non-fungsional; merancang ERD dan UI.": "Interviewed stakeholders and wrote 9 functional and 4 non-functional requirements; designed the ERD and UI.", "Mengimplementasikan fitur utama flipbook (efek balik halaman dan pemutaran audio).": "Implemented the main flipbook feature (page-turn effect and audio playback).", "Masalah: orang tua perlu memantau kebutuhan gizi harian anak dan mendapat rekomendasi makanan beserta harganya.": "Problem: parents need to monitor their child's daily nutrition and get food recommendations along with their cost.", "Menyusun 14 kebutuhan fungsional dan 7 non-fungsional; merancang domain model, ERD, dan database PostgreSQL.": "Wrote 14 functional and 7 non-functional requirements; designed the domain model, ERD, and PostgreSQL database.", "Mengimplementasikan fitur monitoring asupan harian ibu dan ASI anak (penyimpanan lokal dan integrasi API); 10 test case lulus.": "Implemented the daily intake monitoring feature for mothers and breast milk intake for children (local storage and API integration); 10 test cases passed.", "Menambahkan fitur permainan pada sistem deteksi semaphore yang sudah ada: hasil deteksi dibandingkan dengan target untuk menentukan benar atau salah.": "Added a game feature to an existing semaphore detection system: detection results are compared with the target to determine whether they are correct or not.", "Unduh CV": "Download CV", "Mewawancarai stakeholder dan menyusun 9 kebutuhan fungsional dan 4 non-fungsional; merancang ERD dan UI aplikasi.": "Interviewed stakeholders and wrote 9 functional and 4 non-functional requirements; designed the ERD and app UI.", "Mengimplementasikan fitur utama flipbook pada Kado Ceria, aplikasi buku audio interaktif dwibahasa (Sunda-Indonesia), menggunakan Flutter/Dart dan MVVM.": "Implemented the main flipbook feature of Kado Ceria, a bilingual (Sundanese–Indonesian) interactive audio storybook app, using Flutter/Dart and MVVM.", "Menjalankan UAT secara demonstrasi dan mempresentasikan penyerahan aplikasi kepada instansi.": "Ran UAT through a demonstration and presented the app handover to the institution."};
+    var EN = {"Beranda": "Home", "Tentang": "About", "Proyek": "Projects", "Pengalaman": "Experience", "Keahlian": "Skills", "Sertifikat": "Certificates", "Kontak": "Contact", "Buka menu navigasi": "Open navigation menu", "Pilih bahasa": "Select language", "Halo, saya": "Hi, I'm", "Lulusan D3 Software Engineering dengan pengalaman magang dan proyek akademik, mulai dari analisis kebutuhan, perancangan sistem dan database, pengembangan, pengujian, hingga deployment ke cloud. Terbuka untuk posisi System Analyst, Backend Developer, QA, dan Mobile Developer.": "Software Engineering diploma graduate with internship and academic project experience, from requirements analysis, system and database design, and development to testing and cloud deployment. Open to System Analyst, Backend Developer, QA, and Mobile Developer roles.", "Lihat Proyek": "View Projects", "Hubungi Saya": "Contact Me", "Foto profil Muhamad Ilham": "Profile photo of Muhamad Ilham", "Tentang Saya": "About Me", "Lulusan D3 Software Engineering dengan pengalaman magang dan proyek akademik di bidang analisis kebutuhan, pengembangan backend dan mobile, perancangan database, pengujian perangkat lunak, dan deployment ke cloud. Terbiasa menerjemahkan kebutuhan stakeholder menjadi kebutuhan fungsional dan non-fungsional serta model sistem yang mendukung implementasi.": "Software Engineering graduate (D3) with internship and academic project experience in requirements analysis, backend and mobile development, database design, software testing, and cloud deployment. Skilled at turning stakeholder needs into functional and non-functional requirements and system models that support implementation.", "Saat magang di Balai Bahasa Provinsi Jawa Barat, saya mengimplementasikan fitur utama flipbook pada aplikasi mobile Kado Ceria. Saya juga memimpin tim proyek CMS Kado Ceria dalam melakukan keseluruhan timeline pengembangan aplikasi.": "During my internship at Balai Bahasa Provinsi Jawa Barat, I implemented the main flipbook feature of the Kado Ceria mobile app. I also led the Kado Ceria CMS project team through the entire application development timeline.", "Diploma (D3) Software Engineering": "Diploma (D3) in Software Engineering", "Politeknik Negeri Bandung · Agu 2023 – Agu 2026 · IPK 3,58/4,00": "Politeknik Negeri Bandung · Aug 2023 – Aug 2026 · GPA 3.58/4.00", "Proyek utama saya, dengan peran, teknologi, pekerjaan yang saya lakukan, dan status yang sebenarnya.": "My main projects, with my role, technologies, what I worked on, and their actual status.", "Tangkapan layar CMS Kado Ceria": "Screenshot of the Kado Ceria CMS", "Jan 2026 – Agu 2026": "Jan 2026 – Aug 2026", "Peran:": "Role:", "Teknologi:": "Technologies:", "Masalah: konten flipbook aplikasi Kado Ceria tertanam di kode, sehingga setiap pembaruan perlu ubah kode dan deploy ulang. CMS ini dirancang agar Balai Bahasa dapat memperbarui konten tanpa itu.": "Problem: the Kado Ceria app's flipbook content was embedded in code, so every update required a code change and redeployment. This CMS is designed to let Balai Bahasa update content without that.", "Memimpin tim: pembagian tugas dan jadwal.": "Led the team: task allocation and scheduling.", "Menggali 10 user requirement dan 14 business rule, dielaborasi menjadi 34 kebutuhan fungsional dan 10 non-fungsional (2 use case).": "Elicited 10 user requirements and 14 business rules, elaborated into 34 functional and 10 non-functional requirements (2 use cases).", "Merancang arsitektur, package diagram, 12 sequence diagram, class diagram, deployment diagram, dan model data konseptual/logis/fisik.": "Designed the architecture, package diagram, 12 sequence diagrams, class diagram, deployment diagram, and conceptual/logical/physical data models.", "Memelihara dan memperbaiki kode yang sudah ada: bug fitur audio (narasi, latar, objek), konversi buku, dan CRUD buku; refactor logika audio latar untuk mengurangi kode redundan.": "Maintained and improved the existing codebase: fixed bugs in audio features (narration, background, object), book conversion, and book CRUD; refactored background-audio logic to reduce redundant code.", "Menyusun 44 test case UAT; menjalankan pengujian integrasi dan black-box (15 test case) serta validasi (43 test case), semuanya lulus 100%; uji NFR pasca-deployment 5 test case (80% lulus).": "Prepared 44 UAT test cases; ran integration and black-box testing (15 test cases) and validation testing (43 test cases), all passing 100%; post-deployment NFR testing with 5 test cases (80% pass).", "Deploy ke AWS (EC2, S3, RDS, SQS).": "Deployed to AWS (EC2, S3, RDS, SQS).", "Proyek tugas akhir tim, ditujukan untuk Balai Bahasa. Sudah di-deploy ke AWS, belum dipakai secara operasional.": "Team final project, intended for Balai Bahasa. Deployed to AWS; not yet in operational use.", "Lihat repositori": "View repository", "Tangkapan layar aplikasi mobile Kado Ceria": "Screenshot of the Kado Ceria mobile app", "Aplikasi Mobile Kado Ceria": "Kado Ceria Mobile App", "Jul 2025 – Okt 2025 (magang)": "Jul 2025 – Oct 2025 (internship)", "Masalah: buku digital cerita anak dwibahasa (Sunda-Indonesia) terbitan Balai Bahasa perlu dialihwahanakan menjadi buku audio interaktif untuk anak usia dini, pembelajar BIPA, dan penyandang disabilitas.": "Problem: the bilingual (Sundanese–Indonesian) digital children's storybooks published by Balai Bahasa needed to be adapted into interactive audio books for early childhood, BIPA learners, and persons with disabilities.", "Mewawancarai stakeholder dan menganalisis sistem yang berjalan; 2 use case dan 3 sub use case dijadikan 9 kebutuhan fungsional dan 4 non-fungsional.": "Interviewed stakeholders and analyzed the existing system; turned 2 use cases and 3 sub-use cases into 9 functional and 4 non-functional requirements.", "Merancang ERD dan UI aplikasi.": "Designed the ERD and app UI.", "Mengimplementasikan fitur utama flipbook (efek balik halaman dengan page_flip, pemutaran audio dengan audioplayers).": "Implemented the main flipbook feature (page-turn effect with page_flip, audio playback with audioplayers).", "Dikerjakan saat magang dan diserahkan kepada Balai Bahasa; belum dipakai secara operasional oleh pengguna.": "Built during the internship and handed over to Balai Bahasa; not yet in operational use by real users.", "Tangkapan layar aplikasi GROW": "Screenshot of the GROW app", "GROW (Aplikasi Mobile)": "GROW (Mobile App)", "Masalah: orang tua perlu memantau kebutuhan gizi harian anak dan mendapat rekomendasi makanan beserta harga pembuatannya. Aplikasi ini dirancang untuk itu.": "Problem: parents need to monitor their child's daily nutrition and get food recommendations with preparation costs. This app is designed for that.", "Merancang ERD dan database PostgreSQL.": "Designed the ERD and PostgreSQL database.", "Mengimplementasikan fitur monitoring asupan harian ibu dan ASI anak (penyimpanan lokal dan integrasi API).": "Implemented the daily intake monitoring feature for mothers and breast milk intake for children (local storage and API integration).", "Menyusun 10 test case untuk fitur tersebut, semuanya lulus.": "Wrote 10 test cases for that feature, all passing.", "Proyek akademik.": "Academic project.", "Proyek akademik lainnya": "Other academic projects", "Sistem pengenalan wajah berbasis deep learning. Saya me-refactor fitur preprocessing menggunakan library MTCNN.": "Deep-learning-based face recognition system. I refactored the preprocessing feature using the MTCNN library.", "Modifikasi sistem deteksi semaphore yang sudah ada dengan menambahkan fitur permainan di dalamnya dengan sistem hasil deteksi disimpan dan dibandingkan dengan target untuk menentukan benar atau salah.": "Modification of an existing semaphore detection system by adding a game feature: detection results are stored and compared with the target to determine whether they are correct.", "Aplikasi penyembunyi pesan rahasia dalam gambar. Saya mengimplementasikan enkripsi dan dekripsi LSB dengan doubly circular linked list.": "Application that hides secret messages in images. I implemented LSB encryption and decryption using a doubly circular linked list.", "Pencarian Barang dengan Struktur Data Trie": "Item Search Using the Trie Data Structure", "Tugas akademik penerapan struktur data Trie. Saya mengimplementasikan fitur pencarian berbasis Trie.": "Academic assignment applying the Trie data structure. I implemented the Trie-based search feature.", "Logo Balai Bahasa Jabar": "Balai Bahasa Jawa Barat logo", "di Balai Bahasa Provinsi Jawa Barat": "at Balai Bahasa Provinsi Jawa Barat", "Jul 2025 – Okt 2025": "Jul 2025 – Oct 2025", "Mewawancarai stakeholder dan menganalisis sistem yang berjalan; menyusun 2 use case dan 3 sub use case menjadi 9 kebutuhan fungsional dan 4 non-fungsional.": "Interviewed stakeholders and analyzed the existing system; turned 2 use cases and 3 sub-use cases into 9 functional and 4 non-functional requirements.", "Mengimplementasikan fitur utama flipbook pada Kado Ceria, aplikasi buku audio interaktif dwibahasa (Sunda-Indonesia) untuk anak usia dini, pembelajar BIPA, dan penyandang disabilitas, menggunakan Flutter/Dart, MVVM, page_flip, dan audioplayers.": "Implemented the main flipbook feature of Kado Ceria, a bilingual (Sundanese–Indonesian) interactive audio storybook app for early childhood, BIPA learners, and persons with disabilities, using Flutter/Dart, MVVM, page_flip, and audioplayers.", "Menjalankan User Acceptance Testing (UAT) secara demonstrasi dan mempresentasikan penyerahan aplikasi langsung kepada instansi.": "Ran User Acceptance Testing (UAT) as a live demonstration and presented the application handover on-site at the institution.", "Analisis & dokumentasi": "Analysis & documentation", "Analisis sistem berjalan": "Existing-system analysis", "Desain data": "Data design", "Pengujian": "Testing", "Penyusunan test case": "Test case development", "Sertifikat Arutala Junior Backend Developer using Spring Boot": "Arutala Junior Backend Developer using Spring Boot certificate", "Arutalalab · Jul 2026": "Arutalalab · Jul 2026", "Berlaku: Jul 2026 – Jul 2029": "Valid: Jul 2026 – Jul 2029", "Sertifikat TOEIC skor 765": "TOEIC certificate, score 765", "Politeknik Negeri Bandung · Skor 765 · Mei 2026": "Politeknik Negeri Bandung · Score 765 · May 2026", "Berlaku: Mei 2026 – Mei 2028": "Valid: May 2026 – May 2028", "Sertifikat LKMM-TD": "LKMM-TD certificate", "Latihan Keterampilan Manajemen Mahasiswa Tingkat Dasar (LKMM-TD)": "Basic Student Management Skills Training (LKMM-TD)", "Politeknik Negeri Bandung · Nov 2023": "Politeknik Negeri Bandung · Nov 2023", "Berlaku: Lifetime": "Valid: lifetime", "Mari Terhubung": "Let's Connect", "Terbuka untuk peluang kerja sebagai System Analyst, Backend Developer, QA, atau Mobile Developer, serta kolaborasi dan diskusi seputar software engineering.": "Open to opportunities as a System Analyst, Backend Developer, QA, or Mobile Developer, and to collaboration and discussion about software engineering.", "Kembali ke atas": "Back to top", "Repositori privat": "Private repository", "Portofolio Muhamad Ilham Fadillah Suherlan, lulusan D3 Software Engineering dengan fokus System Analysis, Backend Development, dan Software Testing. Lihat proyek, pengalaman magang, dan sertifikat.": "Portfolio of Muhamad Ilham Fadillah Suherlan, D3 Software Engineering graduate focused on System Analysis, Backend Development, and Software Testing. See projects, internship experience, and certificates.", "System Analysis, Backend Development, dan Software Testing.": "System Analysis, Backend Development, and Software Testing.", "Mengidentifikasi stakeholder, merancang domain model; 5 use case dan 1 sub use case dijadikan 14 kebutuhan fungsional dan 7 non-fungsional.": "Identified stakeholders and designed the domain model; turned 5 use cases and 1 sub-use case into 14 functional and 7 non-functional requirements.", "Dokumen SRS": "SRS document", "Dokumen SDD": "SDD document", "Buku panduan": "User guide", "Dokumen teknis": "Technical document", "Masalah: konten flipbook Kado Ceria tertanam di kode, sehingga setiap pembaruan perlu ubah kode dan deploy ulang. CMS ini memungkinkan Balai Bahasa memperbarui konten sendiri.": "Problem: Kado Ceria's flipbook content was embedded in code, so every update required a code change and redeployment. This CMS lets Balai Bahasa update the content on its own.", "Memimpin tim; menyusun 34 kebutuhan fungsional dan 10 non-fungsional serta rancangan sistem (sequence, class, dan deployment diagram, serta model data).": "Led the team; wrote 34 functional and 10 non-functional requirements and the system design (sequence, class, and deployment diagrams, and data models).", "Memperbaiki bug fitur audio, konversi buku, dan CRUD buku, serta me-refactor logika audio latar.": "Fixed bugs in the audio, book conversion, and book CRUD features, and refactored the background audio logic.", "Menyusun 44 test case UAT; pengujian integrasi, black-box, dan validasi lulus 100%, uji NFR pasca-deployment 80%.": "Wrote 44 UAT test cases; integration, black-box, and validation testing passed 100%, post-deployment NFR testing 80%.", "Masalah: buku cerita anak dwibahasa (Sunda-Indonesia) terbitan Balai Bahasa perlu dijadikan buku audio interaktif untuk anak usia dini, pembelajar BIPA, dan penyandang disabilitas.": "Problem: the bilingual (Sundanese–Indonesian) children's storybooks published by Balai Bahasa needed to become interactive audio books for early childhood, BIPA learners, and people with disabilities.", "Mewawancarai stakeholder dan menyusun 9 kebutuhan fungsional dan 4 non-fungsional; merancang ERD dan UI.": "Interviewed stakeholders and wrote 9 functional and 4 non-functional requirements; designed the ERD and UI.", "Mengimplementasikan fitur utama flipbook (efek balik halaman dan pemutaran audio).": "Implemented the main flipbook feature (page-turn effect and audio playback).", "Masalah: orang tua perlu memantau kebutuhan gizi harian anak dan mendapat rekomendasi makanan beserta harganya.": "Problem: parents need to monitor their child's daily nutrition and get food recommendations along with their cost.", "Menyusun 14 kebutuhan fungsional dan 7 non-fungsional; merancang domain model, ERD, dan database PostgreSQL.": "Wrote 14 functional and 7 non-functional requirements; designed the domain model, ERD, and PostgreSQL database.", "Mengimplementasikan fitur monitoring asupan harian ibu dan ASI anak (penyimpanan lokal dan integrasi API); 10 test case lulus.": "Implemented the daily intake monitoring feature for mothers and breast milk intake for children (local storage and API integration); 10 test cases passed.", "Menambahkan fitur permainan pada sistem deteksi semaphore yang sudah ada: hasil deteksi dibandingkan dengan target untuk menentukan benar atau salah.": "Added a game feature to an existing semaphore detection system: detection results are compared with the target to determine whether they are correct or not.", "Unduh CV": "Download CV", "Mewawancarai stakeholder dan menyusun 9 kebutuhan fungsional dan 4 non-fungsional; merancang ERD dan UI aplikasi.": "Interviewed stakeholders and wrote 9 functional and 4 non-functional requirements; designed the ERD and app UI.", "Mengimplementasikan fitur utama flipbook pada Kado Ceria, aplikasi buku audio interaktif dwibahasa (Sunda-Indonesia), menggunakan Flutter/Dart dan MVVM.": "Implemented the main flipbook feature of Kado Ceria, a bilingual (Sundanese–Indonesian) interactive audio storybook app, using Flutter/Dart and MVVM.", "Menjalankan UAT secara demonstrasi dan mempresentasikan penyerahan aplikasi kepada instansi.": "Ran UAT through a demonstration and presented the app handover to the institution.", "Desain terinspirasi dari Massively oleh HTML5 UP": "Design inspired by Massively by HTML5 UP"};
     var norm = function (t) { return t.replace(/\s+/g, ' ').trim(); };
     document.querySelectorAll('a[data-repo]').forEach(function (a) {
       if (!PUBLIC_REPOS[a.getAttribute('data-repo')]) {
@@ -546,7 +552,7 @@
       document.querySelectorAll('[data-lang-btn]').forEach(function (b) {
         var on = b.getAttribute('data-lang-btn') === l;
         b.setAttribute('aria-pressed', on);
-        b.classList.toggle('bg-gold-400', on); b.classList.toggle('text-navy-900', on);
+        b.classList.toggle('bg-sky-400', on); b.classList.toggle('text-navy-900', on);
         b.classList.toggle('text-blue-100/80', !on);
       });
       try { localStorage.setItem('lang', l); } catch (e) {}
@@ -560,5 +566,22 @@
   })();
 </script>
 
+  <script>
+    // Efek muncul halus saat scroll; kartu proyek muncul bergantian
+    (function () {
+      if (!document.documentElement.classList.contains('js')) return;
+      var els = document.querySelectorAll('main section:not(#beranda) > div, #proyek article');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+      els.forEach(function (el, i) {
+        el.classList.add('reveal');
+        if (el.tagName === 'ARTICLE') el.style.setProperty('--d', ((i % 3) * 120) + 'ms');
+        io.observe(el);
+      });
+    })();
+  </script>
 </body>
 </html>
